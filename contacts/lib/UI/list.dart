@@ -1,9 +1,11 @@
 
 
+import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
-
+import 'package:isar/isar.dart';
+import '../isar/contact.dart';
 import 'contactTile.dart';
-
+import 'package:contacts/global.dart' as global;
 class contactsList extends StatefulWidget {
   const contactsList({Key? key}) : super(key: key);
 
@@ -12,15 +14,24 @@ class contactsList extends StatefulWidget {
 }
 
 class _contactsListState extends State<contactsList> {
-  List<contact> list =[contact(name: "bill gates", number: "5757", description: "really rich dude", )];
+  List<contactPage> list =[contactPage(name: "bill gates", number: "5757", description: "really rich dude", )];
+  Stream stream = contacts.where().build().watch(initialReturn: true);
   @override
   Widget build(BuildContext context) {
+   // final contacts = global.isar!.co
     return Expanded(
-      child: ListView.builder(
-        itemCount: list.length,
-          itemBuilder: (context, index){
-            return list[index];
-          }),
+      child: StreamBuilder(
+        stream: stream,
+        builder: (context, snapshot) {
+          var contactList = snapshot.data ?? [];
+          return ListView.builder(
+            itemCount: (contactList as List).length,
+              itemBuilder: (context, index){
+              Contact contact = contactList[index];
+                return contactPage(name: contact.name, number: contact.number, description: contact.description);
+              });
+        }
+      ),
     );
   }
 }

@@ -1,10 +1,20 @@
 import 'package:contacts/UI/list.dart';
+import 'package:contacts/isar/contact.dart';
 import 'package:flutter/material.dart';
-
+import 'package:isar/isar.dart';
+import 'global.dart' as global;
+import 'package:path_provider/path_provider.dart';
 import 'UI/appBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final dir = await getApplicationSupportDirectory();
+
+  final isar = await Isar.open(
+    [ContactSchema],
+    directory: dir.path,
+  );
+  global.isar = isar;
   runApp(list(
   ));
 }

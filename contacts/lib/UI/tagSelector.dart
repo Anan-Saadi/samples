@@ -1,7 +1,7 @@
 import 'package:contacts/UI/dialogs/addTagDialog.dart';
 import 'package:flutter/material.dart';
 
-import 'global.dart';
+import '../global.dart';
 
 class tagSelector extends StatefulWidget {
   const tagSelector({Key? key}) : super(key: key);

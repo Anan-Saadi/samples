@@ -1,4 +1,4 @@
-import 'package:contacts/UI/global.dart';
+import 'package:contacts/global.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showNewTagDialog(BuildContext context)async {

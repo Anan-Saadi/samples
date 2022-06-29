@@ -1,4 +1,6 @@
 import 'package:contacts/UI/tagSelector.dart';
+import 'package:contacts/isar/contact.dart';
+import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showNewContactDialog(BuildContext context)async {
@@ -10,6 +12,8 @@ Future<void> showNewContactDialog(BuildContext context)async {
 
     TextEditingController _nameController = TextEditingController();
     TextEditingController _numberController = TextEditingController();
+    TextEditingController _descriptionController = TextEditingController();
+
 
     return StatefulBuilder(builder: (context, setState){
         var size = MediaQuery.of(context).size.width/2;
@@ -40,6 +44,10 @@ Future<void> showNewContactDialog(BuildContext context)async {
                   },
                   decoration: InputDecoration(hintText: "Number"),
                 ),
+                TextFormField(
+                  controller: _descriptionController,
+                  decoration: InputDecoration(hintText: "Description"),
+                ),
                 tagSelector(),
               ],
             )),
@@ -52,9 +60,11 @@ Future<void> showNewContactDialog(BuildContext context)async {
                   }, child: Text("cancel")),
                   TextButton(onPressed: (){
                     if(_formKey.currentState!.validate()){
-                      print(_nameController.text);
-                      print(_numberController.text);
-
+                      Contact contact = Contact()
+                      ..description = _descriptionController.value.text
+                      ..name = _nameController.value.text
+                      ..number = _numberController.value.text;
+                      writeData(contact);
                       Navigator.of(context).pop();
                     }
                   }, child: Text("OK")),

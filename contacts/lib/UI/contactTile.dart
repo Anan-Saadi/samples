@@ -1,11 +1,11 @@
 import 'package:contacts/UI/infoPage.dart';
 import 'package:flutter/material.dart';
 
-class contact extends StatelessWidget {
+class contactPage extends StatelessWidget {
   final String name;
   final String number;
   final String description;
-  const contact({required this.name, required this.number, required this.description});
+  const contactPage({required this.name, required this.number, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,6 @@ class contact extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) =>
                         info(initials: initials, name: name, number: number, description: description,)));
-            print("tapped");
           },
           child: Container(
             padding: EdgeInsets.all(8.0),
