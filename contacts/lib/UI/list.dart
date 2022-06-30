@@ -14,7 +14,6 @@ class contactsList extends StatefulWidget {
 }
 
 class _contactsListState extends State<contactsList> {
-  List<contactPage> list =[contactPage(name: "bill gates", number: "5757", description: "really rich dude", )];
   Stream stream = contacts.where().build().watch(initialReturn: true);
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class _contactsListState extends State<contactsList> {
             itemCount: (contactList as List).length,
               itemBuilder: (context, index){
               Contact contact = contactList[index];
-                return contactPage(name: contact.name, number: contact.number, description: contact.description);
+                return contactTile(name: contact.name, number: contact.number, description: contact.description, id: contact.id!,);
               });
         }
       ),

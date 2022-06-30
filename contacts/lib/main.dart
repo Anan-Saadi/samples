@@ -1,6 +1,7 @@
 import 'package:contacts/UI/list.dart';
 import 'package:contacts/isar/contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'global.dart' as global;
 import 'package:path_provider/path_provider.dart';
@@ -17,6 +18,10 @@ void main() async {
   global.isar = isar;
   runApp(list(
   ));
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom,
+
+  ]);
 }
 
 class list extends StatefulWidget {
@@ -27,9 +32,11 @@ class list extends StatefulWidget {
 }
 
 class _listState extends State<list> {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
         child: Column(

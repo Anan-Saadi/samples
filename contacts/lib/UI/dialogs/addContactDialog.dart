@@ -32,6 +32,7 @@ Future<void> showNewContactDialog(BuildContext context)async {
               children: [
                 TextFormField(
                   controller: _nameController,
+                  textInputAction: TextInputAction.next,
                   validator: (value){
                     return value!.isNotEmpty ? null : "Invalid input";
                   },
@@ -39,6 +40,8 @@ Future<void> showNewContactDialog(BuildContext context)async {
                 ),
                 TextFormField(
                   controller: _numberController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
                   validator: (value){
                     return value!.isNotEmpty ? null : "Invalid input";
                   },
@@ -46,6 +49,7 @@ Future<void> showNewContactDialog(BuildContext context)async {
                 ),
                 TextFormField(
                   controller: _descriptionController,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(hintText: "Description"),
                 ),
                 tagSelector(),
@@ -64,7 +68,7 @@ Future<void> showNewContactDialog(BuildContext context)async {
                       ..description = _descriptionController.value.text
                       ..name = _nameController.value.text
                       ..number = _numberController.value.text;
-                      writeData(contact);
+                      addContact(contact);
                       Navigator.of(context).pop();
                     }
                   }, child: Text("OK")),

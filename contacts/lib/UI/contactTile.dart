@@ -1,11 +1,13 @@
 import 'package:contacts/UI/infoPage.dart';
+import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
 
-class contactPage extends StatelessWidget {
+class contactTile extends StatelessWidget {
   final String name;
   final String number;
   final String description;
-  const contactPage({required this.name, required this.number, required this.description});
+  final int id;
+  const contactTile({required this.name, required this.number, required this.description, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,16 @@ class contactPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10,),
-                Text(name, style: TextStyle(fontSize: 22),)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(number, style: TextStyle(fontSize: 17),),
+
+                  ],
+                ),
+                Expanded(child: SizedBox()),
+                IconButton(onPressed: (){deleteContact(id);}, icon: Icon(Icons.delete, color: Colors.red,))
               ],
             ),
           ),
