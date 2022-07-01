@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:contacts/UI/infoPage.dart';
 import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
-
 class contactTile extends StatelessWidget {
   final String name;
   final String number;
@@ -18,6 +19,7 @@ class contactTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: GestureDetector(
           onTap: () {
+
             Navigator.push(
                 context,
                 MaterialPageRoute(

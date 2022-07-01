@@ -14,6 +14,7 @@ dependencies:
   isar_flutter_libs: 3.0.0-dev.5
 
   path_provider:
+  provider: ^6.0.3
 
 dev_dependencies:
   isar_generator: 3.0.0-dev.5

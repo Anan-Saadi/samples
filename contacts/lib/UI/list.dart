@@ -1,11 +1,12 @@
 
 
 import 'package:contacts/isar/methods.dart';
+import 'package:contacts/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
+import 'package:provider/provider.dart';
 import '../isar/contact.dart';
 import 'contactTile.dart';
-import 'package:contacts/global.dart' as global;
 class contactsList extends StatefulWidget {
   const contactsList({Key? key}) : super(key: key);
 
@@ -14,22 +15,29 @@ class contactsList extends StatefulWidget {
 }
 
 class _contactsListState extends State<contactsList> {
-  Stream stream = contacts.where().build().watch(initialReturn: true);
+  Stream stream = contactsStream();
   @override
   Widget build(BuildContext context) {
-   // final contacts = global.isar!.co
+    String? searchTerm = context.watch<provider>().searchTerm;
+    var contactList =[];
+
     return Expanded(
       child: StreamBuilder(
         stream: stream,
         builder: (context, snapshot) {
-          var contactList = snapshot.data ?? [];
-          return ListView.builder(
-            itemCount: (contactList as List).length,
-              itemBuilder: (context, index){
-              Contact contact = contactList[index];
-                return contactTile(name: contact.name, number: contact.number, description: contact.description, id: contact.id!,);
-              });
-        }
+          if(searchTerm != null && searchTerm.isNotEmpty){
+            contactList = filterContacts(searchTerm)!;
+          }else{
+            contactList = (snapshot.data ?? []) as List;
+          }
+          contactList??[];
+              return ListView.builder(
+                itemCount: contactList.length,
+                  itemBuilder: (context, index){
+                  Contact contact = contactList[index];
+                    return contactTile(name: contact.name, number: contact.number, description: contact.description, id: contact.id!,);
+                  });
+            }
       ),
     );
   }
