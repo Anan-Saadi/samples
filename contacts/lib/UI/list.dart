@@ -30,7 +30,6 @@ class _contactsListState extends State<contactsList> {
           }else{
             contactList = (snapshot.data ?? []) as List;
           }
-          contactList??[];
               return ListView.builder(
                 itemCount: contactList.length,
                   itemBuilder: (context, index){

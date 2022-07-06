@@ -1,5 +1,6 @@
 import 'package:contacts/UI/list.dart';
 import 'package:contacts/isar/contact.dart';
+import 'package:contacts/isar/workPlace.dart';
 import 'package:contacts/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,7 @@ void main() async {
   final dir = await getApplicationSupportDirectory();
 
   final isar = await Isar.open(
-    [ContactSchema],
+    [ContactSchema, WorkPlaceSchema],
     directory: dir.path,
   );
   global.isar = isar;

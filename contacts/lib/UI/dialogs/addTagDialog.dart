@@ -1,5 +1,8 @@
 import 'package:contacts/global.dart';
+import 'package:contacts/isar/workPlace.dart';
 import 'package:flutter/material.dart';
+
+import '../../isar/methods.dart';
 
 Future<void> showNewTagDialog(BuildContext context)async {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -43,6 +46,9 @@ Future<void> showNewTagDialog(BuildContext context)async {
                     print(_nameController.text);
                     items.insert(items.length-1, _nameController.text);
                     print(items);
+                    workPlace _workPlace = workPlace()
+                      ..name = _nameController.text;
+                    createWorkPlace(_workPlace);
                     Navigator.of(context ).pop();
                   }
                 }, child: Text("OK")),
