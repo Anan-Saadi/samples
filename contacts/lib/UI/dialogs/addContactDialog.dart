@@ -1,4 +1,3 @@
-import 'package:contacts/UI/tagSelector.dart';
 import 'package:contacts/isar/contact.dart';
 import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +51,6 @@ Future<void> showNewContactDialog(BuildContext context)async {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(hintText: "Description"),
                 ),
-                tagSelector(),
               ],
             )),
             actions: [

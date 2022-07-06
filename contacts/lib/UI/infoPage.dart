@@ -1,4 +1,3 @@
-import 'package:contacts/UI/tagSelector.dart';
 import 'package:flutter/material.dart';
 
 class info extends StatefulWidget {
@@ -73,9 +72,6 @@ class _infoState extends State<info> {
             ),TextFormField(
               controller: _descriptionController,
             ),
-
-            tagSelector(),
-
           ],
         ),
       ),
