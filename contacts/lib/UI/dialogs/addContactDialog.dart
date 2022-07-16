@@ -8,7 +8,6 @@ Future<void> showNewContactDialog(BuildContext context)async {
   showDialog(
 
       context: context, builder: (context){
-
     TextEditingController _nameController = TextEditingController();
     TextEditingController _numberController = TextEditingController();
     TextEditingController _descriptionController = TextEditingController();

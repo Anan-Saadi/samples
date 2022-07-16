@@ -10,14 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  isar: 3.0.0-dev.5
-  isar_flutter_libs: 3.0.0-dev.5
+  isar: 3.0.0-dev.8
+  isar_flutter_libs: 3.0.0-dev.8
 
   path_provider:
   provider: ^6.0.3
+  lazy_load_scrollview: ^1.3.0
+  faker_dart: ^0.1.6
 
 dev_dependencies:
-  isar_generator: 3.0.0-dev.5
+  isar_generator: 3.0.0-dev.8
   build_runner: any
 
 flutter:

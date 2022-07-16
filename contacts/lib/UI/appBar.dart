@@ -1,4 +1,5 @@
 import 'package:contacts/UI/dialogs/addContactDialog.dart';
+import 'package:contacts/generrate.dart';
 import 'package:contacts/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,18 @@ class _appBarState extends State<appBar> {
     return Container(
       child: Row(
         children: [
+          PopupMenuButton(itemBuilder: (BuildContext context)=> [
+            PopupMenuItem(
+              value: 'share',
+              onTap: ()=> clear(),
+              child: Text('Share'),
+            ),
+            PopupMenuItem(
+              value: 'add',
+              onTap: ()=> generateMany(),
+              child: Text('add'),
+            ),
+          ]),
       Expanded(
       child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

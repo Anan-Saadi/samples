@@ -1,18 +1,16 @@
+import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
 
-class info extends StatefulWidget {
-  final String initials;
-  final String name;
-  final String description;
-  final String number;
+import '../isar/contact.dart';
 
-  const info(
-      {Key? key,
-      required this.description,
-      required this.initials,
-      required this.name,
-      required this.number})
-      : super(key: key);
+class info extends StatefulWidget {
+  final Contact contact;
+  final String initials;
+  const info({
+    Key? key,
+    required this.contact,
+    required this.initials,
+  }) : super(key: key);
 
   @override
   _infoState createState() => _infoState();
@@ -32,24 +30,40 @@ class _infoState extends State<info> {
       child: Text("ok"),
       value: "ok",
     ),
-    //DropdownMenuItem(child: TextButton(onPressed: ()=>print("nice"), child: Text("hello")))
   ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _nameController.text = widget.name;
-    _numberController.text = widget.number;
-    _descriptionController.text  = widget.description;
+    _nameController.text = widget.contact.name;
+    _numberController.text = widget.contact.number;
+    _descriptionController.text = widget.contact.description;
   }
+  bool changed = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: changed? Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
+                onPressed: (){
+                widget.contact..name = _nameController.text;
+                widget.contact..number = _numberController.text;
+                widget.contact..description = _descriptionController.text;
+                addContact(widget.contact);
+            }, child: Text("save", style: TextStyle(color: Colors.blue),)),
+          ],
+        )
+            :SizedBox(),
+      ),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
@@ -64,13 +78,23 @@ class _infoState extends State<info> {
             SizedBox(
               height: 100,
             ),
-            TextFormField(
-              controller: _nameController,
-            ),
-            TextFormField(
-              controller: _numberController,
-            ),TextFormField(
-              controller: _descriptionController,
+            Form(
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _nameController,
+                  ),
+                  TextFormField(
+                    controller: _numberController,
+                  ),
+                  TextFormField(
+                    controller: _descriptionController,
+                  ),
+                ],
+              ),
+              onChanged: () => setState(() {
+                changed = true;
+              }),
             ),
           ],
         ),

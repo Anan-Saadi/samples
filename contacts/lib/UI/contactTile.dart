@@ -1,18 +1,21 @@
 import 'dart:async';
 
 import 'package:contacts/UI/infoPage.dart';
+import 'package:contacts/isar/contact.dart';
 import 'package:contacts/isar/methods.dart';
 import 'package:flutter/material.dart';
+
 class contactTile extends StatelessWidget {
-  final String name;
-  final String number;
-  final String description;
-  final int id;
-  const contactTile({required this.name, required this.number, required this.description, required this.id});
+  final Contact contact;
+  const contactTile({required this.contact});
 
   @override
   Widget build(BuildContext context) {
+    String name = contact.name;
+    String number = contact.number;
+    int id = contact.id;
     String initials = getInitials(name);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       child: ClipRRect(
@@ -24,10 +27,10 @@ class contactTile extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        info(initials: initials, name: name, number: number, description: description,)));
+                        info(initials: initials, contact: contact,)));
           },
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             color: Colors.grey,
             child: Row(
               children: [
@@ -36,7 +39,7 @@ class contactTile extends StatelessWidget {
                     getInitials(name),
                   ),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -45,8 +48,10 @@ class contactTile extends StatelessWidget {
 
                   ],
                 ),
-                Expanded(child: SizedBox()),
-                IconButton(onPressed: (){deleteContact(id);}, icon: Icon(Icons.delete, color: Colors.red,))
+                Expanded(child: const SizedBox()),
+                IconButton(onPressed: (){deleteContact(id);}, icon: Icon(Icons.delete, color: Colors.red,)),
+                //ElevatedButton(onPressed: ()=> generateMany(), child: Text("new contact"))
+
               ],
             ),
           ),
