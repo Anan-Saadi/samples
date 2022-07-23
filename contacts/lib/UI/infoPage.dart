@@ -1,7 +1,11 @@
+import 'package:contacts/UI/tagSelector.dart';
 import 'package:contacts/isar/methods.dart';
+import 'package:contacts/isar/workPlace.dart';
 import 'package:flutter/material.dart';
 
+import '../global.dart';
 import '../isar/contact.dart';
+import 'dialogs/addTagDialog.dart';
 
 class info extends StatefulWidget {
   final Contact contact;
@@ -20,17 +24,9 @@ class _infoState extends State<info> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
+  String dropDownValue = "Google";
 
-  List<DropdownMenuItem> menuItems = [
-    DropdownMenuItem(
-      child: Text("hello"),
-      value: 'hello',
-    ),
-    DropdownMenuItem(
-      child: Text("ok"),
-      value: "ok",
-    ),
-  ];
   @override
   void initState() {
     super.initState();
@@ -38,27 +34,35 @@ class _infoState extends State<info> {
     _numberController.text = widget.contact.number;
     _descriptionController.text = widget.contact.description;
   }
-  bool changed = false;
 
+  bool changed = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: changed? Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-                onPressed: (){
-                widget.contact..name = _nameController.text;
-                widget.contact..number = _numberController.text;
-                widget.contact..description = _descriptionController.text;
-                addContact(widget.contact);
-            }, child: Text("save", style: TextStyle(color: Colors.blue),)),
-          ],
-        )
-            :SizedBox(),
+        title: changed
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white)),
+                      onPressed: () {
+                        widget.contact..name = _nameController.text;
+                        widget.contact..number = _numberController.text;
+                        widget.contact
+                          ..description = _descriptionController.text;
+                        addContact(widget.contact);
+                      },
+                      child: Text(
+                        "save",
+                        style: TextStyle(color: Colors.blue),
+                      )),
+                ],
+              )
+            : SizedBox(),
       ),
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -96,6 +100,34 @@ class _infoState extends State<info> {
                 changed = true;
               }),
             ),
+            DropdownButton(
+              focusNode: _focusNode,
+              value: dropDownValue,
+              items: getAllCompanies()
+                  .map(
+                    (workPlace e) => e.name != 'create'
+                        ? DropdownMenuItem<String>(value: e.name, child: Text(e.name))
+                        : DropdownMenuItem(
+                            child: Text(e.name),
+                            value: e.name,
+                            onTap: () {},
+                          ),
+                  )
+                  .toList(),
+              onChanged: (dynamic newValue) async {
+                if (newValue == 'create') {
+                  await showNewTagDialog(context).then((value) {
+                    setState(() {
+                      dropDownValue = items[items.length - 2];
+                    });
+                  });
+                } else {
+                  setState(() {
+                    dropDownValue = newValue!;
+                  });
+                }
+              },
+            )
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:contacts/UI/dialogs/addContactDialog.dart';
 import 'package:contacts/generrate.dart';
+import 'package:contacts/isar/methods.dart';
 import 'package:contacts/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,24 @@ class _appBarState extends State<appBar> {
               value: 'add',
               onTap: ()=> generateMany(),
               child: Text('add'),
+
+            ),
+            PopupMenuItem(
+              value: 'workPlace',
+              onTap: ()=> createWorkPlace(null),
+              child: Text('workPlace'),
+
+            ),
+            PopupMenuItem(
+              value: 'first',
+              onTap: ()=> firstWorkPlace(),
+              child: Text('first'),
+
+            ),
+            PopupMenuItem(
+              value: 'work',
+              onTap: ()=> getFirstWorkPlace(),
+              child: Text('work'),
             ),
           ]),
       Expanded(

@@ -5,10 +5,10 @@ part 'workPlace.g.dart';
 
 @Collection()
 class workPlace{
-
-  @Id()
-  int? id;
+  workPlace({required this.name});
+  Id id = Isar.autoIncrement;
   late String name;
 
+  @Backlink(to: 'company')
   final employees = IsarLinks<Contact>();
 }

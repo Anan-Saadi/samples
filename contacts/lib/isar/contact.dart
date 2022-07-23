@@ -1,3 +1,4 @@
+import 'package:contacts/isar/workPlace.dart';
 import 'package:isar/isar.dart';
 
 part 'contact.g.dart';
@@ -16,5 +17,6 @@ class Contact{
   String get formattedNumber => number.replaceAll('-', '').replaceAll('+', '');
 
   late String description;
-
+  
+  final company = IsarLink<workPlace>();
 }

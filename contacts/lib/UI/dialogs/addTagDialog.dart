@@ -48,7 +48,7 @@ Future<void> showNewTagDialog(BuildContext context)async {
                     print(items);
                     workPlace _workPlace = workPlace()
                       ..name = _nameController.text;
-                    createWorkPlace(_workPlace);
+                    //createWorkPlace(_workPlace);
                     Navigator.of(context ).pop();
                   }
                 }, child: Text("OK")),
